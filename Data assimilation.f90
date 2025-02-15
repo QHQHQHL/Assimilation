@@ -1,19 +1,3 @@
-subroutine data_assimilation(Z,H,Y,n,var_Z,var_n,L,dh,nC,position,Q,W,K,var_H)
-
-implicit none
-
-integer                         :: i, j, m, o, nC                           ! counting variables and number of catchments
-integer                         :: position                                 ! deltaZ(ic,1) | catchment num with altimetry obs
-real(kind=8)                    :: dh,L2                                    ! water level difference between obs and model
-real(kind=8),parameter          :: std_q=0.20, std_w=0.40, std_n=0.40       ! percentual errors of the model parameters
-real(kind=8),parameter          :: std_obs=0.034                             ! obs error in meters
-real(kind=8),dimension(nC)      :: Z, H, Y, L, Q, W, n, var_H               ! bottom level, water height and surface level, reaches length
-real(kind=8),dimension(nC)      :: var_Z, var_n, K, fx, fx2, dhdhx2         ! Z and n variance, Kalman Gain, reduction function
-real(kind=8)                    :: dhdhx, dhdhx3, dhdhx4, dhdnx             ! derivative of the h related to h downstream
-real(kind=8)                    :: covhzx, sf, rz, rq, rw, rn, sf2          ! covariance between h and z or n downstream
-real(kind=8)                    :: var_H2, acum                             ! water level variance
-real(kind=8)                    :: covQ, covW, covn, covZ                   !
-
 ! data assimilation
 
 dhdhx2(position)=0  !new
